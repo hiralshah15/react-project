@@ -1,6 +1,3 @@
-// import { SHOW_LOADER } from "../constants/const";
-// import * as CONSTS from '../constants/const'
-
 let initialState = {
   showSpinner: false
 };

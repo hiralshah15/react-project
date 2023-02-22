@@ -1,4 +1,3 @@
-//Action Creators
 
 import { HIDE_LOADER, SHOW_LOADER } from "../constants/const";
 

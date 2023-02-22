@@ -11,7 +11,6 @@ const Home = () => {
   const navigate = useNavigate();
   useEffect(() => {
     dispatch(getProducts()).then((res) => {
-      console.log("tretetert", res);
       setData(res.products);
     });
   }, []);

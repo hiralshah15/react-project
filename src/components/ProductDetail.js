@@ -15,13 +15,6 @@ const ProductDetail = () => {
       console.log("tretetert", res);
       setData(res);
     });
-    // fetch(`https://dummyjson.com/products/${params.id}`)
-    //   .then((res) => res.json())
-    //   .then((json) => {
-    //     console.log(json);
-
-    //     setData(json);
-    //   });
   }, [params.id]);
 
   return (
