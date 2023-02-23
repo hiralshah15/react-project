@@ -5,25 +5,26 @@ import Table from "@mui/joy/Table";
 import { getProducts } from "../redux/actions/product";
 import { useNavigate } from "react-router-dom";
 import { toggleLoader } from "../redux/actions/loader";
+import Loader from "./Loader";
 
-const Home = () => {
+export const Home = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const data = useSelector(state=>state.product.products);
-  const isLoading = useSelector(state=>state.loader.showSpinner)
+  const data = useSelector((state) => state.product.products);
+  const isLoading = useSelector((state) => state.loader.showSpinner);
 
   useEffect(() => {
-    (async ()=>{
-      dispatch(toggleLoader(true));
-      await Promise.all([
-        dispatch(getProducts()),
-        dispatch(getProducts()),
-        dispatch(getProducts()),
-        dispatch(getProducts()),
-        dispatch(getProducts()),
-      ]);
-      dispatch(toggleLoader(false));
-    })()
+    (async () => {
+        props.toogleLoading(true);
+        await Promise.all([
+          dispatch(getProducts()),
+          dispatch(getProducts()),
+          dispatch(getProducts()),
+          dispatch(getProducts()),
+          dispatch(getProducts()),
+        ]);
+        props.toogleLoading(false);
+    })();
   }, []);
 
   const handleView = (id) => {
@@ -44,7 +45,8 @@ const Home = () => {
           </tr>
         </thead>
         <tbody>
-          {data &&!isLoading&&
+          {data &&
+            !isLoading &&
             data?.map((item, index) => {
               return (
                 <tr key={item.id}>
@@ -70,4 +72,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Loader(Home);
