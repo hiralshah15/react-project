@@ -20,12 +20,10 @@ export const getProducts = () => {
 
 export const getProductById = (id) => {
   return async (dispatch) => {
-    dispatch(toggleLoader(true));
     let pro = await fetch(`https://dummyjson.com/products/${id}`)
       .then(async (res) => {
         let data = await res.json();
 
-        dispatch(toggleLoader(false));
         return data;
       })
       .catch((e) => console.log("error", e));
