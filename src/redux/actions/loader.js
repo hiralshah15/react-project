@@ -1,14 +1,10 @@
+//Action Creators
 
-import { HIDE_LOADER, SHOW_LOADER } from "../constants/const";
+import { TOGGLE_LOADER } from "../constants/const";
 
-export const showLoader = () => (dispatch) => {
+export const toggleLoader = (value) => (dispatch) => {
   dispatch({
-    type: SHOW_LOADER
-  });
-};
-
-export const hideLoader = () => (dispatch) => {
-  dispatch({
-    type: HIDE_LOADER
+    type: TOGGLE_LOADER,
+    payload: value || false,
   });
 };

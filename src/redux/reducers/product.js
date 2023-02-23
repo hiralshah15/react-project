@@ -1,13 +1,14 @@
-import { TOGGLE_LOADER } from "../constants/const";
+import { SET_PRODUCTS } from '../constants/product'
+
 let initialState = {
-  showSpinner: false
+    products:[],
 };
 export default (state = initialState, action) => {
   switch (action.type) {
-    case TOGGLE_LOADER:
+    case SET_PRODUCTS:
       return {
         ...state,
-        showSpinner: action.payload,
+        products: action.payload,
       };
 
     default:

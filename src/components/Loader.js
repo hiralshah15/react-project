@@ -6,12 +6,11 @@ const antIcon = (
 );
 
 const Loader = () => {
-  const showSpinner = useSelector((state) => state.loader);
-  console.log(showSpinner);
+  const showSpinner = useSelector((state) => state.loader.showSpinner);
 
   return (
     <div>
-      {showSpinner.showSpinner && (
+      {showSpinner && (
           <Spin indicator={antIcon} size="large" />
       )}
     </div>

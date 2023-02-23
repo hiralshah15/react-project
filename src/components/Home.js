@@ -1,24 +1,35 @@
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@mui/material";
 import Table from "@mui/joy/Table";
 import { getProducts } from "../redux/actions/product";
 import { useNavigate } from "react-router-dom";
+import { toggleLoader } from "../redux/actions/loader";
 
 const Home = () => {
-  const [data, setData] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const data = useSelector(state=>state.product.products);
+  const isLoading = useSelector(state=>state.loader.showSpinner)
+
   useEffect(() => {
-    dispatch(getProducts()).then((res) => {
-      setData(res.products);
-    });
+    (async ()=>{
+      dispatch(toggleLoader(true));
+      await Promise.all([
+        dispatch(getProducts()),
+        dispatch(getProducts()),
+        dispatch(getProducts()),
+        dispatch(getProducts()),
+        dispatch(getProducts()),
+      ]);
+      dispatch(toggleLoader(false));
+    })()
   }, []);
 
   const handleView = (id) => {
-    console.log(data);
     navigate(`product/${id}`);
   };
+
   return (
     <>
       <div className="product-list">Product List Page</div>
@@ -33,7 +44,7 @@ const Home = () => {
           </tr>
         </thead>
         <tbody>
-          {data &&
+          {data &&!isLoading&&
             data?.map((item, index) => {
               return (
                 <tr key={item.id}>
