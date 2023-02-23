@@ -4,16 +4,19 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, Card, CardContent, Typography } from "@mui/material";
 import { getProductById } from "../redux/actions/product";
+import Loader from "./Loader";
 
-const ProductDetail = () => {
+const ProductDetail = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
   const [data, setData] = useState({});
   useEffect(() => {
+    props.toogleLoading(true)
     dispatch(getProductById(params.id)).then((res) => {
       console.log("tretetert", res);
       setData(res);
+      props.toogleLoading(false)
     });
   }, [params.id]);
 
@@ -55,4 +58,4 @@ const ProductDetail = () => {
   );
 };
 
-export default ProductDetail;
+export default Loader(ProductDetail);
